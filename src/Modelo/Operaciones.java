@@ -10,5 +10,10 @@ package Modelo;
  * @author sulak
  */
 public class Operaciones {
-    
+    public void transponer(){
+        
+        
+        
+        
+    }
 }
