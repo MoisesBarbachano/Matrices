@@ -25,7 +25,7 @@ public class mainPrueba {
         System.out.println("--------------------------");
         
         System.out.println(
-        operaciones.determinante(matriz));
+        operaciones.obtenerDeterminante(matriz));
     }
     
 }
