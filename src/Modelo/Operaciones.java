@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 =======
 /*
@@ -95,4 +95,4 @@ public class Operaciones {
     }
     
 }
->>>>>>> fa55cc435faca80f4a5b6ed7f46651bab27188f0
+
