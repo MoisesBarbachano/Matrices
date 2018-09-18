@@ -32,6 +32,7 @@ public class Operaciones {
     {
         double determinante;
         int numColumnasMatriz = matriz.length;
+        int numFilasMatriz = matriz[0].length;
         int numColumnasMatrizBasica = 2;
         if(numColumnasMatriz==numColumnasMatrizBasica)
         {
@@ -43,7 +44,7 @@ public class Operaciones {
         {
             int ultimoIndice = numColumnasMatriz - 1;
             double[][] matrizReordenada = new double[ultimoIndice][ultimoIndice];
-            for(int fila=0; fila<numColumnasMatriz; fila++)
+            for(int fila=0; fila<numFilasMatriz; fila++)
             {
                 if(fila!=columna)
                 {
@@ -69,20 +70,22 @@ public class Operaciones {
     }
     
     public double[][] sumarMatrices(double[][] primeraMatriz, double[][] segundaMatriz){
-       
-        double terceraMatriz[][] = new double [primeraMatriz[0].length][primeraMatriz.length];
+        int numFilasPrimeraMatriz = primeraMatriz[PRIMERINDICE].length;
+        int numColumPrimeraMatriz = primeraMatriz.length;
+        double[][] matrizResultante = new double [numFilasPrimeraMatriz][numColumPrimeraMatriz];
         for (int fila = 0; fila < primeraMatriz[0].length; fila++) {
             for (int columna = 0; columna < primeraMatriz.length; columna++) {
-                terceraMatriz [fila][columna] = primeraMatriz [fila][columna] + segundaMatriz [fila][columna];
+                matrizResultante [fila][columna] = primeraMatriz [fila][columna] + segundaMatriz [fila][columna];
             }
         }
-        return terceraMatriz;
+        return matrizResultante;
     }
     
     public double[][] multiplicarEscalar(double[][] matriz, double escalar){
-        
-        for (int fila = 0; fila < matriz[0].length; fila++) {
-            for (int columna = 0; columna < matriz.length; columna++) {
+        int numFilasMatriz = matriz[PRIMERINDICE].length;
+        for (int fila = 0; fila < numFilasMatriz; fila++) {
+            int numColumMatriz = matriz.length;
+            for (int columna = 0; columna < numColumMatriz; columna++) {
                 matriz [fila][columna] = escalar * (matriz[fila][columna]);
             }
         }
@@ -90,16 +93,18 @@ public class Operaciones {
     }
     
     public double[][] multiplicarMatrices(double[][] primeraMatriz, double[][] segundaMatriz){
-        double terceraMatriz[][] = new double [primeraMatriz[0].length][segundaMatriz[0].length];
-        
-        for (int filaPrimeraMatriz = 0; filaPrimeraMatriz < primeraMatriz[0].length; filaPrimeraMatriz++) {
-            for (int columna = 0; columna < primeraMatriz.length; columna++) {
-                for (int columnaSegundaMatriz = 0; columnaSegundaMatriz < segundaMatriz.length; columnaSegundaMatriz++) {
-                    terceraMatriz[filaPrimeraMatriz][columnaSegundaMatriz] += primeraMatriz[filaPrimeraMatriz][columna] * segundaMatriz[columna][columnaSegundaMatriz];
+        double[][] matrizResultante = new double [primeraMatriz[0].length][segundaMatriz[0].length];
+        int numFilasPrimeraMatriz = primeraMatriz[0].length;
+        for (int filaPrimeraMatriz = 0; filaPrimeraMatriz < numFilasPrimeraMatriz; filaPrimeraMatriz++) {
+            int numColumPrimeraMatriz = primeraMatriz.length;
+            for (int columnaPrimeraMatriz = 0; columnaPrimeraMatriz < numColumPrimeraMatriz; columnaPrimeraMatriz++) {
+                int numColumSegundaMatriz = segundaMatriz.length;
+                for (int columnaSegundaMatriz = 0; columnaSegundaMatriz < numColumSegundaMatriz; columnaSegundaMatriz++) {
+                    matrizResultante[filaPrimeraMatriz][columnaSegundaMatriz] += primeraMatriz[filaPrimeraMatriz][columnaPrimeraMatriz] * segundaMatriz[columnaPrimeraMatriz][columnaSegundaMatriz];
                 }
             }
         }
-        return terceraMatriz;
+        return matrizResultante;
     }
     
 }
