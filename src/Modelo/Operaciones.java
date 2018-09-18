@@ -16,12 +16,10 @@ public class Operaciones {
         public double[][] transponerMatrices(double[][] matriz)
     {
         int numColumnasMatriz = matriz.length;
-        double[][] matrizTranspuesta = new double[matriz[PRIMERINDICE].length][numColumnasMatriz];   //Colocar inicializacion de codigo antes del loop 
-        for (int columna = 0; columna < numColumnasMatriz; columna++)           //Un loop con una sola funcion (Este loop solo recorre la matriz)
-        {      
-            int numFilasMatriz = matriz[columna].length;                        
-            for (int fila = 0; fila <numFilasMatriz; fila++)                    //Usar nombres significativos de variables para hacer loops más fáciles de leer
-            {
+        double[][] matrizTranspuesta = new double[matriz[PRIMERINDICE].length][numColumnasMatriz];   //put initialization code directly before the loop
+        for (int columna = 0; columna < numColumnasMatriz; columna++) {      //Un loop con una sola funcion (Este loop solo recorre la matriz)
+            int numFilasMatriz = matriz[columna].length;                        //Usar nombres significativos de variables para hacer loops más fáciles de leer
+            for (int fila = 0; fila <numFilasMatriz; fila++) {
                 matrizTranspuesta[fila][columna] = matriz[columna][fila];
             }
         }                                                                  
@@ -50,8 +48,7 @@ public class Operaciones {
             {
                 if(fila!=columna)              //Poner los casos más comunes primeros
                 {
-                    for(int ColumMatrizReOrdenada=1; ColumMatrizReOrdenada<numColumnasMatriz; ColumMatrizReOrdenada++)
-                    {                 
+                    for(int ColumMatrizReOrdenada=1; ColumMatrizReOrdenada<numColumnasMatriz; ColumMatrizReOrdenada++){                 
                         int indiceMatrizReordenada = 0;
                         if(fila <= (columna-1))              //Sigue la clausula if con una sentencia significativa(no colocar null en la sentencia if, y hacerlo dentro del else)
                         {
@@ -65,12 +62,9 @@ public class Operaciones {
                 }
             }                                                                                   
             if(columna%DIVISOR_MODULO_PAR==0)
-            {
             sumatoriaDeterminante+=matriz[columna][PRIMERINDICE] * obtenerDeterminante(matrizReordenada);
-            }else                                                                                                           //Considera la clausula else
-            {                                                                                                            
+            else                                                                                                            //Considera la clausula else
             sumatoriaDeterminante-=matriz[columna][PRIMERINDICE] * obtenerDeterminante(matrizReordenada);
-            }
         }                                                                                                                   //Se evita usar código que dependa de los valores de los indices finales de los loop
         return sumatoriaDeterminante;
     }
@@ -79,10 +73,8 @@ public class Operaciones {
         int numFilasPrimeraMatriz = primeraMatriz[PRIMERINDICE].length;
         int numColumPrimeraMatriz = primeraMatriz.length;
         double[][] matrizResultante = new double [numFilasPrimeraMatriz][numColumPrimeraMatriz];
-        for (int fila = 0; fila < primeraMatriz[0].length; fila++)              //Limitar el alcance de los indices de loop para si mismos
-        {                
-            for (int columna = 0; columna < primeraMatriz.length; columna++)    //Declarar variables indices dentro de cada loop
-            {      
+        for (int fila = 0; fila < primeraMatriz[0].length; fila++) {                //Limitar el alcance de los indices de loop para si mismos
+            for (int columna = 0; columna < primeraMatriz.length; columna++) {      //Declarar variables indices dentro de cada loop
                 matrizResultante [fila][columna] = primeraMatriz [fila][columna] + segundaMatriz [fila][columna];
             }
         }
@@ -91,11 +83,9 @@ public class Operaciones {
     
     public double[][] multiplicarEscalar(double[][] matriz, double escalar){
         int numFilasMatriz = matriz[PRIMERINDICE].length;
-        for (int fila = 0; fila < numFilasMatriz; fila++)                           //Limitar el numero de niveles de loop a 3
-        {    
+        for (int fila = 0; fila < numFilasMatriz; fila++) {    //Limitar el numero de niveles de loop a 3
             int numColumMatriz = matriz.length;
-            for (int columna = 0; columna < numColumMatriz; columna++) 
-            {
+            for (int columna = 0; columna < numColumMatriz; columna++) {
                 matriz [fila][columna] = escalar * (matriz[fila][columna]);
             }
         }
@@ -105,14 +95,11 @@ public class Operaciones {
     public double[][] multiplicarMatrices(double[][] primeraMatriz, double[][] segundaMatriz){
         double[][] matrizResultante = new double [primeraMatriz[0].length][segundaMatriz[0].length];
         int numFilasPrimeraMatriz = primeraMatriz[0].length;                                                        //Colocar la declaración de variables inmediatamente afuera de los loop
-        for (int filaPrimeraMatriz = 0; filaPrimeraMatriz < numFilasPrimeraMatriz; filaPrimeraMatriz++)             //Limitar el numero de niveles de loop a 3
-        {           
+        for (int filaPrimeraMatriz = 0; filaPrimeraMatriz < numFilasPrimeraMatriz; filaPrimeraMatriz++) {           //Limitar el numero de niveles de loop a 3
             int numColumPrimeraMatriz = primeraMatriz.length;
-            for (int columnaPrimeraMatriz = 0; columnaPrimeraMatriz < numColumPrimeraMatriz; columnaPrimeraMatriz++) 
-            {
+            for (int columnaPrimeraMatriz = 0; columnaPrimeraMatriz < numColumPrimeraMatriz; columnaPrimeraMatriz++) {
                 int numColumSegundaMatriz = segundaMatriz.length;
-                for (int columnaSegundaMatriz = 0; columnaSegundaMatriz < numColumSegundaMatriz; columnaSegundaMatriz++) 
-                {
+                for (int columnaSegundaMatriz = 0; columnaSegundaMatriz < numColumSegundaMatriz; columnaSegundaMatriz++) {
                     matrizResultante[filaPrimeraMatriz][columnaSegundaMatriz] += primeraMatriz[filaPrimeraMatriz][columnaPrimeraMatriz] * segundaMatriz[columnaPrimeraMatriz][columnaSegundaMatriz];
                 }
             }
@@ -120,4 +107,34 @@ public class Operaciones {
         return matrizResultante;
     }
     
+    public double[][] gaussJordan(double[][] matriz){
+          int pivote = 0;
+          double auxiliarDivision = 0;
+          int longitud = matriz.length;
+          final int ajusteLongitud=longitud+1;
+           // Lineamientos general: No hay ningun loop vacio || cada loop solo tiene una funcion || Cada loop termina || Se usan variables con nombres claros
+           for (int contador = 0; contador < longitud; contador++) { // Se usa for ya que se requiere que se ejecute un numero especifico de veces || Los contadores son  enteros 
+             auxiliarDivision = matriz[pivote][pivote]; 
+            
+                for (int contadorOperacion = 0; contadorOperacion < ajusteLongitud; contadorOperacion++) { // hacer los loops cortos || Limitar los Loops anidados a maximo 3 niveles
+                    matriz[pivote][contadorOperacion] =( matriz[pivote][contadorOperacion] )/ (auxiliarDivision); 
+                 }
+           
+          
+           for (int contadorNoPivote = 0; contadorNoPivote < longitud; contadorNoPivote++) { // entra en un loop de una manera || incializar  variables en el loop || Los lopps evitan crosstalk
+            if (contadorNoPivote != pivote) { // Escribir primero los casos normales 
+                double valorTemporal = matriz[contadorNoPivote][pivote];
+                for (int contadorAjuste = 0; contadorAjuste < ajusteLongitud; contadorAjuste++) {
+                    matriz[contadorNoPivote][contadorAjuste] = ( matriz[pivote][contadorAjuste])*(valorTemporal * -1) + matriz[contadorNoPivote][contadorAjuste];
+                }
+            }
+        }
+
+          
+            pivote++; // Cuidar los loop-housekeeping
+        }
+           
+        return matriz;
+    }
+  
 }
