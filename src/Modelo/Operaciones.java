@@ -10,20 +10,20 @@ package Modelo;
  * @author sulak
  */
 public class Operaciones {
-    int PRIMERINDICE = 0;
-    int SEGUNDOINDICE = 1;
-    int DIVISOR_MODULO_PAR = 2;
+    final int PRIMERINDICE = 0;
+    final int SEGUNDOINDICE = 1;
+    final int DIVISOR_MODULO_PAR = 2;
         public double[][] transponerMatrices(double[][] matriz)
     {
         int numColumnasMatriz = matriz.length;
-        double[][] matrizTranspuesta = new double[matriz[PRIMERINDICE].length][numColumnasMatriz];
-        for (int columna = 0; columna < numColumnasMatriz; columna++) {
-            int numFilasMatriz = matriz[columna].length;
+        double[][] matrizTranspuesta = new double[matriz[PRIMERINDICE].length][numColumnasMatriz];   //put initialization code directly before the loop
+        for (int columna = 0; columna < numColumnasMatriz; columna++) {      //Un loop con una sola funcion (Este loop solo recorre la matriz)
+            int numFilasMatriz = matriz[columna].length;                        //Usar nombres significativos de variables para hacer loops más fáciles de leer
             for (int fila = 0; fila <numFilasMatriz; fila++) {
                 matrizTranspuesta[fila][columna] = matriz[columna][fila];
             }
-        }
-        
+        }                                                                  
+                                                                    
         
         return matrizTranspuesta;
     }
@@ -40,32 +40,32 @@ public class Operaciones {
             return determinante;
         }
         double sumatoriaDeterminante=0;
-        for(int columna=0; columna<numColumnasMatriz; columna++)
-        {
+        for(int columna=0; columna<numColumnasMatriz; columna++)                         //Mantener como máximo 3 niveles de LOOPS
+        {                                                                                 //Hacer loops largos especialmente claros
             int ultimoIndice = numColumnasMatriz - 1;
             double[][] matrizReordenada = new double[ultimoIndice][ultimoIndice];
-            for(int fila=0; fila<numFilasMatriz; fila++)
+            for(int fila=0; fila<numFilasMatriz; fila++)                            //Hacer los loops tan cortos como se pueda ver dentro de tu pantalla
             {
-                if(fila!=columna)
+                if(fila!=columna)              //Poner los casos más comunes primeros
                 {
-                    for(int k=1; k<numColumnasMatriz; k++){
+                    for(int ColumMatrizReOrdenada=1; ColumMatrizReOrdenada<numColumnasMatriz; ColumMatrizReOrdenada++){                 
                         int indiceMatrizReordenada = 0;
-                        if(fila<columna)
+                        if(fila <= (columna-1))              //Sigue la clausula if con una sentencia significativa(no colocar null en la sentencia if, y hacerlo dentro del else)
                         {
                             indiceMatrizReordenada=fila;
-                        }else if(fila>columna)
+                        }else if((fila-1) >= columna)
                         {
                             indiceMatrizReordenada=fila-1;
                         }
-                        matrizReordenada[indiceMatrizReordenada][k-1] = matriz[fila][k];
+                        matrizReordenada[indiceMatrizReordenada][ColumMatrizReOrdenada-1] = matriz[fila][ColumMatrizReOrdenada];
                     }
                 }
-            }
+            }                                                                                   
             if(columna%DIVISOR_MODULO_PAR==0)
             sumatoriaDeterminante+=matriz[columna][PRIMERINDICE] * obtenerDeterminante(matrizReordenada);
-            else
+            else                                                                                                            //Considera la clausula else
             sumatoriaDeterminante-=matriz[columna][PRIMERINDICE] * obtenerDeterminante(matrizReordenada);
-        }
+        }                                                                                                                   //Se evita usar código que dependa de los valores de los indices finales de los loop
         return sumatoriaDeterminante;
     }
     
@@ -73,8 +73,8 @@ public class Operaciones {
         int numFilasPrimeraMatriz = primeraMatriz[PRIMERINDICE].length;
         int numColumPrimeraMatriz = primeraMatriz.length;
         double[][] matrizResultante = new double [numFilasPrimeraMatriz][numColumPrimeraMatriz];
-        for (int fila = 0; fila < primeraMatriz[0].length; fila++) {
-            for (int columna = 0; columna < primeraMatriz.length; columna++) {
+        for (int fila = 0; fila < primeraMatriz[0].length; fila++) {                //Limitar el alcance de los indices de loop para si mismos
+            for (int columna = 0; columna < primeraMatriz.length; columna++) {      //Declarar variables indices dentro de cada loop
                 matrizResultante [fila][columna] = primeraMatriz [fila][columna] + segundaMatriz [fila][columna];
             }
         }
@@ -83,7 +83,7 @@ public class Operaciones {
     
     public double[][] multiplicarEscalar(double[][] matriz, double escalar){
         int numFilasMatriz = matriz[PRIMERINDICE].length;
-        for (int fila = 0; fila < numFilasMatriz; fila++) {
+        for (int fila = 0; fila < numFilasMatriz; fila++) {    //Limitar el numero de niveles de loop a 3
             int numColumMatriz = matriz.length;
             for (int columna = 0; columna < numColumMatriz; columna++) {
                 matriz [fila][columna] = escalar * (matriz[fila][columna]);
@@ -94,8 +94,8 @@ public class Operaciones {
     
     public double[][] multiplicarMatrices(double[][] primeraMatriz, double[][] segundaMatriz){
         double[][] matrizResultante = new double [primeraMatriz[0].length][segundaMatriz[0].length];
-        int numFilasPrimeraMatriz = primeraMatriz[0].length;
-        for (int filaPrimeraMatriz = 0; filaPrimeraMatriz < numFilasPrimeraMatriz; filaPrimeraMatriz++) {
+        int numFilasPrimeraMatriz = primeraMatriz[0].length;                                                        //Colocar la declaración de variables inmediatamente afuera de los loop
+        for (int filaPrimeraMatriz = 0; filaPrimeraMatriz < numFilasPrimeraMatriz; filaPrimeraMatriz++) {           //Limitar el numero de niveles de loop a 3
             int numColumPrimeraMatriz = primeraMatriz.length;
             for (int columnaPrimeraMatriz = 0; columnaPrimeraMatriz < numColumPrimeraMatriz; columnaPrimeraMatriz++) {
                 int numColumSegundaMatriz = segundaMatriz.length;
