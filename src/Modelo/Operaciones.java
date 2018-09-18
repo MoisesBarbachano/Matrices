@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+
+=======
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,10 +12,8 @@ package Modelo;
  *
  * @author sulak
  */
-public class Operaciones 
-{
-    
-    public double[][] transponer(double[][] matriz)
+public class Operaciones {
+        public double[][] transponer(double[][] matriz)
     {
         double[][] matrizTranspuesta = new double[matriz[0].length][matriz.length];
         for (int i = 0; i < matriz.length; i++) {
@@ -58,4 +59,40 @@ public class Operaciones
     }
     return suma;
 }
+    
+    public double[][] sumar(double[][] primeraMatriz, double[][] segundaMatriz){
+       
+        double terceraMatriz[][] = new double [primeraMatriz[0].length][primeraMatriz.length];
+        for (int fila = 0; fila < primeraMatriz[0].length; fila++) {
+            for (int columna = 0; columna < primeraMatriz.length; columna++) {
+                terceraMatriz [fila][columna] = primeraMatriz [fila][columna] + segundaMatriz [fila][columna];
+            }
+        }
+        return terceraMatriz;
+    }
+    
+    public double[][] multiplicacionEscalar(double[][] matriz, double escalar){
+        
+        for (int fila = 0; fila < matriz[0].length; fila++) {
+            for (int columna = 0; columna < matriz.length; columna++) {
+                matriz [fila][columna] = escalar * (matriz[fila][columna]);
+            }
+        }
+        return matriz;
+    }
+    
+    public double[][] multiplicar(double[][] primeraMatriz, double[][] segundaMatriz){
+        double terceraMatriz[][] = new double [primeraMatriz[0].length][segundaMatriz[0].length];
+        
+        for (int filaPrimeraMatriz = 0; filaPrimeraMatriz < primeraMatriz[0].length; filaPrimeraMatriz++) {
+            for (int columna = 0; columna < primeraMatriz.length; columna++) {
+                for (int columnaSegundaMatriz = 0; columnaSegundaMatriz < segundaMatriz.length; columnaSegundaMatriz++) {
+                    terceraMatriz[filaPrimeraMatriz][columnaSegundaMatriz] += primeraMatriz[filaPrimeraMatriz][columna] * segundaMatriz[columna][columnaSegundaMatriz];
+                }
+            }
+        }
+        return terceraMatriz;
+    }
+    
 }
+>>>>>>> fa55cc435faca80f4a5b6ed7f46651bab27188f0
