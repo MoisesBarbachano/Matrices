@@ -13,7 +13,7 @@ import Modelo.Operaciones;
  */
 public class mainPrueba {
     public static void main(String[] args) {
-        double[][] matriz = {{3.0,2.0,1.0},{0.0,2.0,-5.0},{-2.0,1.0,4.0}};
+        double[][] matriz = {{3.0,2.0,0.0,-1.0},{1.0,5.0,1.0,0.0},{4.0,-2.0,0.0,1.0},{0.0,1.0,-3.0, 2.0}};
         Operaciones operaciones = new Operaciones();
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
